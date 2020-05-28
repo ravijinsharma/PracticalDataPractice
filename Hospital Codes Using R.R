@@ -1,20 +1,19 @@
 # Introduction
-The data for this exercise came from the Hospital Compare web site (http://hospitalcompare.hhs.gov) run by the U.S. Department of Health and Human Services. The purpose of the web site is to provide data and information about the quality of care at over 4,000 Medicare-certiﬁed hospitals in the U.S. This dataset essentially covers all major U.S. hospitals. This dataset is used for a variety of purposes, including determining whether hospitals should be ﬁned for not providing high quality care to patients (see http://goo.gl/jAXFX for some background on this particular topic).
-A csv file named "outcome-of-care-measures.csv" contains information about 30-day mortality and readmission rates for heart attacks, heart failure, and pneumonia for over 4,000 hospitals.
+#The data for this exercise came from the Hospital Compare web site (http://hospitalcompare.hhs.gov) run by the U.S. Department of Health and Human Services. The purpose of the web site is to provide data and information about the quality of care at over 4,000 Medicare-certiﬁed hospitals in the U.S. This dataset essentially covers all major U.S. hospitals. This dataset is used for a variety of purposes, including determining whether hospitals should be ﬁned for not providing high quality care to patients (see http://goo.gl/jAXFX for some background on this particular topic).
+#A csv file named "outcome-of-care-measures.csv" contains information about 30-day mortality and readmission rates for heart attacks, heart failure, and pneumonia for over 4,000 hospitals.
 
 ##1. Finding the best hospital in a state
-First objective is to Know which Hospital in a perticular state has minimum mortality rate in case of a perticular disease(Heart attack, Heart failure, Pneumonia. So the function called best that take two arguments: the 2-character abbreviated name of a state and an outcome name. The function reads the outcome-of-care-measures.csv ﬁle and returns a character vector with the name of the hospital that has the best (i.e. lowest) 30-day mortality for the specified outcome in that state. Write a function called best that take two arguments: the 2-character abbreviated name of a state and an outcome name. The function reads the outcome-of-care-measures.csv ﬁle and returns a character vector with the name of the hospital that has the best (i.e. lowest) 30-day mortality for the specified outcome in that state.  The outcomes can be one of “heart attack”, “heart failure”, or “pneumonia”. Hospitals that do not have data on a particular outcome should be excluded from the set of hospitals when deciding the rankings.
-. The outcomes can be one of “heart attack”, “heart failure”, or “pneumonia”. Hospitals that do not have data on a particular outcome should be excluded from the set of hospitals when deciding the rankings.
+#First objective is to Know which Hospital in a perticular state has minimum mortality rate in case of a perticular disease(Heart attack, Heart failure, Pneumonia. So the function called best that take two arguments: the 2-character abbreviated name of a state and an outcome name. The function reads the outcome-of-care-measures.csv ﬁle and returns a character vector with the name of the hospital that has the best (i.e. lowest) 30-day mortality for the specified outcome in that state. Write a function called best that take two arguments: the 2-character abbreviated name of a state and an outcome name. The function reads the outcome-of-care-measures.csv ﬁle and returns a character vector with the name of the hospital that has the best (i.e. lowest) 30-day mortality for the specified outcome in that state.  The outcomes can be one of “heart attack”, “heart failure”, or “pneumonia”. Hospitals that do not have data on a particular outcome should be excluded from the set of hospitals when deciding the rankings.The outcomes can be one of “heart attack”, “heart failure”, or “pneumonia”. Hospitals that do not have data on a particular outcome should be excluded from the set of hospitals when deciding the rankings.
 
-following is the code:
+#code:
 
 best<-function(state,outcome){
 	data<-read.csv("outcome-of-care-measures.csv",colClasses="character") #colClasses, specify the classes of all columns as character
 	temp<-as.data.frame(cbind(data[,7],
-							data[,2],
-							data[,11],
-							data[,17],
-							data[,23]))		
+				  data[,2],
+				  data[,11],
+				  data[,17],
+				  data[,23]))		
 	colnames(temp)<-c("state","hospital","heart attack","heart failure","pneumonia")
 	if(!state %in% temp[,"state"]){
 		stop("Invalid State")
@@ -32,7 +31,7 @@ return(result)
 }	
 		
 
-Following are the example outputs :
+#Following are the example outputs :
 > best("TX", "heart failure")
 [1] "FORT DUNCAN MEDICAL CENTER"
 > best("MD", "heart attack")
@@ -42,7 +41,9 @@ Following are the example outputs :
 
 
 ##2.  Ranking hospitals by outcome in a state
- A function called rankhospital that takes three arguments: the 2-character abbreviated name of a state (state), an outcome (outcome), and the ranking of a hospital in that state for that outcome (rank). The function reads the outcome-of-care-measures.csv ﬁle and returns a character vector with the name of the hospital that has the ranking speciﬁed by the num argument.
+# A function called rankhospital that takes three arguments: the 2-character abbreviated name of a state (state), an outcome (outcome), and the ranking of a hospital in that state for that outcome (rank). The function reads the outcome-of-care-measures.csv ﬁle and returns a character vector with the name of the hospital that has the ranking speciﬁed by the num argument.
+
+#Code
 
 rankhospital<-function(state,outcome,rank="best"){
   path<-"c:/Coursera/R studio/Hospital"
@@ -79,7 +80,7 @@ return(result)
   
 }
 
-Followings are output:
+#Followings are output:
  rankhospital("TX", "heart failure", 4)
 [1] "DETAR HOSPITAL NAVARRO"
 > rankhospital("MD", "heart attack", "worst")
@@ -88,8 +89,9 @@ Followings are output:
 
 
 ##3. Ranking Hospitals in all States
- A function called rankall that takes two arguments: an outcome name (outcome) and a hospital ranking (rank). The function reads the outcome-of-care-measures.csv ﬁle and returns a 2-column data frame containing the hospital in each state that has the ranking specified in rank.
-Code: 
+# A function called rankall that takes two arguments: an outcome name (outcome) and a hospital ranking (rank). The function reads the outcome-of-care-measures.csv ﬁle and returns a 2-column data frame containing the hospital in each state that has the ranking specified in rank.
+	
+#Code: 
 
 rankall<-function(outcome,rank="best"){
   path<-"c:/Coursera/R studio/Hospital"
